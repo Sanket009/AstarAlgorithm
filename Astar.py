@@ -9,23 +9,20 @@ color = (255,255,255)
 flag = ''
 grid = []
 count = 0
-
 font = pygame.font.SysFont('dejavuserif',10)
-
 nodes = [] #nodes[0] is ending node (red) and node[1] starting node (green) 
 OpenList = [] #contains lists that need to be checked , here checked means if they have the shortest path 
 ClosedList = [] #contains lists that have been checked 
 parentAndChild = {}  
-children = {} #children color is light blue (3, 252, 202)
+children = {} 
 values = {} #OpenListValues
 #ChildValues = {}  
 CurrentNode = (0,0)
-
 l = []
 Obstacles = []
 
-#Function for extracting the paths
 
+#Function for extracting the paths
 def checkIf(node):
     for a in range(1,len(parentAndChild)):
         x = list(parentAndChild.keys())[-a]
@@ -36,13 +33,12 @@ def checkIf(node):
         if node == nodes[1]: break
         checkIf(x)
 
-
+#Generating 9x9 Grids
 for row in range(10):
     grid.append([])
     for column in range(10):
         grid[row].append(0)
         values.update({(row,column) : [0,0,0]})
-
 
 while GameMode:
     pygame.time.delay(10)
@@ -55,12 +51,10 @@ while GameMode:
                 print('pressed e')
             elif event.key == pygame.K_s:
                 flag = 's'
-                print('pressed s')
-                
+                print('pressed s') 
             elif event.key == pygame.K_o:
                 print('pressed o')
                 flag = 'o'
-
         elif event.type == pygame.MOUSEBUTTONDOWN:
             pos = pygame.mouse.get_pos()
             column = pos[0] // (gap + margin)
@@ -68,7 +62,6 @@ while GameMode:
             if flag == 'e':
                 grid[row][column] = 1
                 nodes.append((row,column))  #adds starting node to nodes[0]
-
             elif flag == 's':
                 grid[row][column] = 2
                 nodes.append((row,column))  #adds starting node to nodes[1]
@@ -93,8 +86,6 @@ while GameMode:
                 elif len(nodes) == 1:
                     values.update({(row,column):[( abs(row - nodes[0][0]) + abs(column - nodes[0][1]) ),0,0] })
                 
-
-
                 pygame.draw.rect(win,color,((margin + gap)*column + margin,
                 (margin + gap)*row + margin,
                 gap,
@@ -116,15 +107,14 @@ while GameMode:
                 
                 pygame.display.update()
 
-                #Algorithm Starts Here
+    #Algorithm Starts Here
     while OpenList != []:
         count +=1
         CurrentNode = (0,0) 
                     
         if len(OpenList) == 1:
             CurrentNode = OpenList[len(OpenList) - 1 ]
-        else:
-            #this lines needs to be Checked again it's the values not the nodes 
+        else: 
             for a in range(len(OpenList) - 1):
                 if values[OpenList[a]][2] < values[OpenList[a+1]][2]:
                     OpenList[a] , OpenList[a+1] = OpenList[a+1] , OpenList[a] #Swapping
@@ -163,7 +153,6 @@ while GameMode:
             children[child][2] = children[child][0] + children[child][1] # F Cost
             #Skip if there's any obstacle
             if child in Obstacles:
-                #del children[child]
                 continue
             if abs( child[0] - CurrentNode[0] ) + abs( child[1] - CurrentNode[1] ) == 2:
                 if ((child[0] - 1) and (child[0] - 1)) in Obstacles: 
@@ -171,27 +160,16 @@ while GameMode:
                 if ((child[0] + 1) and (child[0] + 1)) in Obstacles:
                     continue
                  
-
-
             if child in OpenList:
                 if children[child][1] >= values[child][1]: continue
 
-
             #adding child to the OpenList
             OpenList.append(child)
-            values[child] = children[child]
-            
+            values[child] = children[child]            
             parentAndChild[CurrentNode].append(child) 
-            
-            #grid[child[0]][child[1]] = 0
-
 
         children.clear()
         checkIf(nodes[0])
-                    
-                    
-                            
-                
-                    
+                        
 pygame.quit()
 
