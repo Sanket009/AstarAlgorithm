@@ -9,3 +9,12 @@ You need to have Python version 3.7.3 installed on your pc .
 # How To Use It 
 It's fairly simple to use this program . Run this program using [python Astar.py]
 After you've run it you'll get some grids and this is where we play around . Press E(for ending point) on your keyboard and select one grid with our mouse pointer and it will be colored to red indicating it is the ending point . Please note there can only be one ending point and press O(for obstacles) on your keyboad and select the grids which you want to be you obstacles . These obstacles can be more than one . Then at last press S (for starting point) and select the grid . This is the triggering point after this program will work and will find the shortest path from starting to ending point 
+
+# Initial layout
+![Initial](img/img1.PNG)
+
+# After Pressing E and clicking on any block
+![Initial](img/img2.PNG)
+
+# Final Visualization of Shorted Path
+![Initial](img/img3.PNG)
