@@ -4,7 +4,7 @@ A simple implementation of A star algorithm to find the shortest path between tw
 # Requirements
 You need to have Python version 3.7.3 installed on your pc . 
 - After you've installed python onto your maching you will be needing an additional library called Pygame .
-- You can simple use your python package manager (pip) to install . Type in [pip install pgzero] on your terminal and you're good to go
+- You can simply use your python package manager (pip) to install . Type in [pip install pgzero] on your terminal and you're good to go
 
 # How To Use It 
 It's fairly simple to use this program . Run this program using [python Astar.py]
